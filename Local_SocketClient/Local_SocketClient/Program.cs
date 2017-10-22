@@ -7,11 +7,12 @@ namespace SocketClient
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             try
             {
-                SendMessageFromSocket(8005);
+                SendMessageFromSocket(11000);
             }
             catch (Exception ex)
             {
@@ -33,7 +34,7 @@ namespace SocketClient
             // Устанавливаем удаленную точку для сокета
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("0.0.0.0"), port);
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, port);
 
             Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
