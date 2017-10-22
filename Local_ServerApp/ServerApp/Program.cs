@@ -11,20 +11,15 @@ namespace ServerApp
     {
         static void Main(string[] args)
         {
-           
-            IPAddress IP = IPAddress.Parse("0.0.0.0");
-            //IPHostEntry ipHost = Dns.GetHostEntry(;
-            //IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint ipEndPoint = new IPEndPoint(IP, 8005);
 
-            //// Устанавливаем для сокета локальную конечную точку
-            //IPHostEntry ipHost = Dns.GetHostEntry("localhost");
-            //IPAddress ipAddr = ipHost.AddressList[0];
-            //IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, 11000);
+            // Устанавливаем для сокета локальную конечную точку
+            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, 11000);
 
             // Создаем сокет Tcp/Ip
-            Socket sListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, 
-                ProtocolType.Tcp);
+            Socket sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
             // Назначаем сокет локальной конечной точке и слушаем входящие сокеты
             try
             {
@@ -75,7 +70,5 @@ namespace ServerApp
                 Console.ReadLine();
             }
         }
-
-    
     }
 }
